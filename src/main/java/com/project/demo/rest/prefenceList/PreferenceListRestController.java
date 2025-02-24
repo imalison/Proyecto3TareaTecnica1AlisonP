@@ -70,7 +70,7 @@ public class PreferenceListRestController {
     }
 
     @PostMapping
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()&& hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> addPreferenceList(@RequestBody PreferenceList preferenceList, HttpServletRequest request) {
         PreferenceList savedPreferencelist = preferenceListRepository.save(preferenceList);
         return new GlobalResponseHandler().handleResponse(
@@ -81,7 +81,7 @@ public class PreferenceListRestController {
     }
 
     @PutMapping
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()&& hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     public ResponseEntity<?> updatePreferenceList(@RequestBody PreferenceList preferenceList, HttpServletRequest request) {
         PreferenceList savedPreferencelist = preferenceListRepository.save(preferenceList);
         return new GlobalResponseHandler().handleResponse(
